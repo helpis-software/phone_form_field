@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: circle_flags
+dependency_overrides:
+  circle_flags:
+    path: packages/flutter_circle_flags

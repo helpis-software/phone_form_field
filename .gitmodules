@@ -1,0 +1,3 @@
+[submodule "packages/flutter_circle_flags"]
+	path = packages/flutter_circle_flags
+	url = https://github.com/helpis-software/flutter_circle_flags.git
