@@ -1,3 +1,8 @@
+## 7.1.0
+
+ - **FEAT**: add titleStyle and subTitle style ([#117](https://github.com/helpis-software/ocdp.git/issues/117)). ([35d06db9](https://github.com/helpis-software/ocdp.git/commit/35d06db9dc8a09ddc49b74e11dac0850ba1fda19))
+ - **FEAT**: add greek internationalization ([#102](https://github.com/helpis-software/ocdp.git/issues/102)). ([d25b4a00](https://github.com/helpis-software/ocdp.git/commit/d25b4a00203be882a1a34e210221619e39eb09a1))
+
 ## [7.0.5]
 
 - Better rendering of flags on the web
