@@ -2,6 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:phone_form_field/src/models/iso_code.dart';
 
 class PhoneFieldController extends ChangeNotifier {
+  PhoneFieldController({
+    required final String? national,
+    required final IsoCode isoCode,
+    required this.focusNode,
+  }) {
+    isoCodeController = ValueNotifier<IsoCode>(isoCode);
+    nationalNumberController = TextEditingController(text: national);
+    isoCodeController.addListener(notifyListeners);
+    nationalNumberController.addListener(notifyListeners);
+  }
   late final ValueNotifier<IsoCode> isoCodeController;
   late final TextEditingController nationalNumberController;
 
@@ -11,43 +21,32 @@ class PhoneFieldController extends ChangeNotifier {
   IsoCode get isoCode => isoCodeController.value;
   String? get national => nationalNumberController.text;
 
-  set isoCode(IsoCode isoCode) => isoCodeController.value = isoCode;
+  set isoCode(final IsoCode isoCode) => isoCodeController.value = isoCode;
 
-  set national(String? national) {
-    national = national ?? '';
-    final currentSelectionOffset =
+  set national(final String? national) {
+    final String national0 = national ?? '';
+    final int currentSelectionOffset =
         nationalNumberController.selection.extentOffset;
-    final isCursorAtEnd =
+    final bool isCursorAtEnd =
         currentSelectionOffset == nationalNumberController.text.length;
-    var offset = national.length;
+    int offset = national0.length;
 
     if (isCursorAtEnd) {
-      offset = national.length;
-    } else if (currentSelectionOffset <= national.length) {
+      offset = national0.length;
+    } else if (currentSelectionOffset <= national0.length) {
       offset = currentSelectionOffset;
     }
     // when the cursor is at the end we need to preserve that
     // since there is formatting going on we need to explicitely do it
     nationalNumberController.value = TextEditingValue(
-      text: national,
+      text: national0,
       selection: TextSelection.fromPosition(
         TextPosition(offset: offset),
       ),
     );
   }
 
-  PhoneFieldController({
-    required String? national,
-    required IsoCode isoCode,
-    required this.focusNode,
-  }) {
-    isoCodeController = ValueNotifier(isoCode);
-    nationalNumberController = TextEditingController(text: national);
-    isoCodeController.addListener(notifyListeners);
-    nationalNumberController.addListener(notifyListeners);
-  }
-
-  selectNationalNumber() {
+  void selectNationalNumber() {
     nationalNumberController.selection = TextSelection(
       baseOffset: 0,
       extentOffset: nationalNumberController.value.text.length,

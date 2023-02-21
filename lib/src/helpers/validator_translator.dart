@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_classes_with_only_static_members
+
 import 'package:flutter/material.dart';
 import 'package:phone_form_field/l10n/generated/phone_field_localization.dart';
 
@@ -5,19 +7,20 @@ typedef _PhoneValidatorMessageDelegate = String? Function(BuildContext context);
 
 class ValidatorTranslator {
   static final Map<String, _PhoneValidatorMessageDelegate> _validatorMessages =
-      {
-    'invalidPhoneNumber': (ctx) =>
+      <String, _PhoneValidatorMessageDelegate>{
+    'invalidPhoneNumber': (final BuildContext ctx) =>
         PhoneFieldLocalization.of(ctx)?.invalidPhoneNumber,
-    'invalidCountry': (ctx) => PhoneFieldLocalization.of(ctx)?.invalidCountry,
-    'invalidMobilePhoneNumber': (ctx) =>
+    'invalidCountry': (final BuildContext ctx) =>
+        PhoneFieldLocalization.of(ctx)?.invalidCountry,
+    'invalidMobilePhoneNumber': (final BuildContext ctx) =>
         PhoneFieldLocalization.of(ctx)?.invalidMobilePhoneNumber,
-    'invalidFixedLinePhoneNumber': (ctx) =>
+    'invalidFixedLinePhoneNumber': (final BuildContext ctx) =>
         PhoneFieldLocalization.of(ctx)?.invalidFixedLinePhoneNumber,
-    'requiredPhoneNumber': (ctx) =>
+    'requiredPhoneNumber': (final BuildContext ctx) =>
         PhoneFieldLocalization.of(ctx)?.requiredPhoneNumber,
   };
 
-  static final Map<String, String> _defaults = {
+  static final Map<String, String> _defaults = <String, String>{
     'invalidPhoneNumber': 'Invalid phone number',
     'invalidCountry': 'Invalid country',
     'invalidMobilePhoneNumber': 'Invalid mobile phone number',
@@ -31,14 +34,14 @@ class ValidatorTranslator {
   /// walking up the widget to get [PhoneFieldLocalization] instance
   /// for each call.
   static String message(
-    BuildContext context,
-    String key,
+    final BuildContext context,
+    final String key,
   ) {
-    String? name = getMessageFromKey(context, key);
+    final String? name = getMessageFromKey(context, key);
     return name ?? _defaults[key] ?? key;
   }
 
-  static String? getMessageFromKey(BuildContext ctx, String key) {
+  static String? getMessageFromKey(final BuildContext ctx, final String key) {
     final _PhoneValidatorMessageDelegate? translateFn = _validatorMessages[key];
     return translateFn?.call(ctx);
   }

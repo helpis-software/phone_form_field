@@ -2,7 +2,7 @@ import 'phone_field_localization.dart';
 
 /// The translations for Italian (`it`).
 class PhoneFieldLocalizationIt extends PhoneFieldLocalization {
-  PhoneFieldLocalizationIt([String locale = 'it']) : super(locale);
+  PhoneFieldLocalizationIt([super.locale = 'it']);
 
   @override
   String get invalidPhoneNumber => 'Numero di telefono invalido';
@@ -23,7 +23,7 @@ class PhoneFieldLocalizationIt extends PhoneFieldLocalization {
   String get noResultMessage => 'Nessun risultato';
 
   @override
-  String get ac_ => 'Isola dell\'Ascensione';
+  String get ac_ => "Isola dell'Ascensione";
 
   @override
   String get ad_ => 'Andorra';
@@ -155,7 +155,7 @@ class PhoneFieldLocalizationIt extends PhoneFieldLocalization {
   String get ch_ => 'Svizzera';
 
   @override
-  String get ci_ => 'Costa d\'Avorio';
+  String get ci_ => "Costa d'Avorio";
 
   @override
   String get ck_ => 'Isole Cook';
@@ -332,7 +332,7 @@ class PhoneFieldLocalizationIt extends PhoneFieldLocalization {
   String get in_ => 'India';
 
   @override
-  String get io_ => 'Territorio britannico dell\'Oceano Indiano';
+  String get io_ => "Territorio britannico dell'Oceano Indiano";
 
   @override
   String get iq_ => 'Iraq';

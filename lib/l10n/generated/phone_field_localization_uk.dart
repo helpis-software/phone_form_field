@@ -2,7 +2,7 @@ import 'phone_field_localization.dart';
 
 /// The translations for Ukrainian (`uk`).
 class PhoneFieldLocalizationUk extends PhoneFieldLocalization {
-  PhoneFieldLocalizationUk([String locale = 'uk']) : super(locale);
+  PhoneFieldLocalizationUk([super.locale = 'uk']);
 
   @override
   String get invalidPhoneNumber => 'Невірний номер телефону';
@@ -30,7 +30,7 @@ class PhoneFieldLocalizationUk extends PhoneFieldLocalization {
   String get ad_ => 'Андорра';
 
   @override
-  String get ae_ => 'Об\'єднані Арабські Емірати';
+  String get ae_ => "Об'єднані Арабські Емірати";
 
   @override
   String get af_ => 'Афганістан';
@@ -156,7 +156,7 @@ class PhoneFieldLocalizationUk extends PhoneFieldLocalization {
   String get ch_ => 'Швейцарія';
 
   @override
-  String get ci_ => 'Кот-д\'івуар';
+  String get ci_ => "Кот-д'івуар";
 
   @override
   String get ck_ => 'Острови Кука';
@@ -453,7 +453,7 @@ class PhoneFieldLocalizationUk extends PhoneFieldLocalization {
   String get ml_ => 'Малі';
 
   @override
-  String get mm_ => 'М\'янма';
+  String get mm_ => "М'янма";
 
   @override
   String get mn_ => 'Монголія';
@@ -555,7 +555,7 @@ class PhoneFieldLocalizationUk extends PhoneFieldLocalization {
   String get pl_ => 'Польща';
 
   @override
-  String get pm_ => 'Сен-П\'єр і Мікелон';
+  String get pm_ => "Сен-П'єр і Мікелон";
 
   @override
   String get pn_ => 'Піткерн';
@@ -693,7 +693,7 @@ class PhoneFieldLocalizationUk extends PhoneFieldLocalization {
   String get tw_ => 'Тайвань';
 
   @override
-  String get tz_ => 'Танзанія, Об\'єднана Республіка Танзанія';
+  String get tz_ => "Танзанія, Об'єднана Республіка Танзанія";
 
   @override
   String get ua_ => 'Україна';
@@ -726,7 +726,7 @@ class PhoneFieldLocalizationUk extends PhoneFieldLocalization {
   String get vi_ => 'Віргінські острови, США';
 
   @override
-  String get vn_ => 'В\'єтнам';
+  String get vn_ => "В'єтнам";
 
   @override
   String get vu_ => 'Вануату';

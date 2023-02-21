@@ -5,42 +5,44 @@ import 'package:phone_form_field/phone_form_field.dart';
 /// have to be recreated
 
 class LocalizedCountryRegistry {
-  final PhoneFieldLocalization _localization;
-
-  static LocalizedCountryRegistry? _instance;
-
-  late final Map<IsoCode, Country> _localizedCountries = Map.fromIterable(
-    // remove iso codes that do not have a traduction yet..
-    IsoCode.values.where((iso) => _names.containsKey(iso)),
-    value: (isoCode) => Country(isoCode, _names[isoCode]!),
-  );
-
   LocalizedCountryRegistry._(this._localization);
 
-  factory LocalizedCountryRegistry.cached(PhoneFieldLocalization localization) {
-    final instance = _instance;
+  factory LocalizedCountryRegistry.cached(
+    final PhoneFieldLocalization localization,
+  ) {
+    final LocalizedCountryRegistry? instance = _instance;
     if (instance != null && instance._localization == localization) {
       return instance;
     }
     return LocalizedCountryRegistry._(localization);
   }
+  final PhoneFieldLocalization _localization;
 
-  Country? find(IsoCode isoCode) => _localizedCountries[isoCode];
+  static LocalizedCountryRegistry? _instance;
+
+  late final Map<IsoCode, Country> _localizedCountries =
+      Map<IsoCode, Country>.fromIterable(
+    // remove iso codes that do not have a traduction yet..
+    IsoCode.values.where(_names.containsKey),
+    value: (final dynamic isoCode) => Country(isoCode, _names[isoCode]!),
+  );
+
+  Country? find(final IsoCode isoCode) => _localizedCountries[isoCode];
 
   /// gets localized countries from isocodes
   List<Country> whereIsoIn(
-    List<IsoCode> isoCodes, {
-    List<IsoCode> omit = const [],
+    final List<IsoCode> isoCodes, {
+    final List<IsoCode> omit = const <IsoCode>[],
   }) {
-    final omitSet = Set.from(omit);
+    final Set<IsoCode> omitSet = Set<IsoCode>.from(omit);
     return isoCodes
-        .where((isoCode) => !omitSet.contains(isoCode))
-        .where((isoCode) => _localizedCountries.containsKey(isoCode))
-        .map((iso) => _localizedCountries[iso]!)
+        .where((final IsoCode isoCode) => !omitSet.contains(isoCode))
+        .where(_localizedCountries.containsKey)
+        .map((final IsoCode iso) => _localizedCountries[iso]!)
         .toList();
   }
 
-  late final Map<IsoCode, String> _names = {
+  late final Map<IsoCode, String> _names = <IsoCode, String>{
     IsoCode.AC: _localization.ac_,
     IsoCode.AD: _localization.ad_,
     IsoCode.AE: _localization.ae_,

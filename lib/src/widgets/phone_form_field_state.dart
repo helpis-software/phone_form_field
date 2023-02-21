@@ -18,10 +18,10 @@ class PhoneFormFieldState extends FormFieldState<PhoneNumber> {
       focusNode: widget.focusNode ?? FocusNode(),
     );
     _controller.addListener(_onControllerChange);
-    _childController.addListener(() => _onChildControllerChange());
+    _childController.addListener(_onChildControllerChange);
     // to expose text selection of national number
     _selectionSubscription = _controller.selectionRequestStream
-        .listen((event) => _childController.selectNationalNumber());
+        .listen((final _) => _childController.selectNationalNumber());
   }
 
   @override
@@ -34,7 +34,7 @@ class PhoneFormFieldState extends FormFieldState<PhoneNumber> {
   void dispose() {
     super.dispose();
     _childController.dispose();
-    _selectionSubscription.cancel();
+    unawaited(_selectionSubscription.cancel());
     _controller.removeListener(_onControllerChange);
     // dispose the controller only when it's initialised in this instance
     // otherwise this should be done where instance is created
@@ -53,11 +53,11 @@ class PhoneFormFieldState extends FormFieldState<PhoneNumber> {
   /// update the childController so the [PhoneField] which
   /// deals with the UI can display the correct value.
   void _onControllerChange() {
-    final phone = _controller.value;
+    final PhoneNumber? phone = _controller.value;
 
     widget.onChanged?.call(phone);
     didChange(phone);
-    final formatted = _getFormattedNsn();
+    final String? formatted = _getFormattedNsn();
     if (_childController.national != formatted) {
       _childController.national = formatted;
     }
@@ -84,11 +84,11 @@ class PhoneFormFieldState extends FormFieldState<PhoneNumber> {
     // to allow for copy pasting and auto fill. If it is one then
     // we parse it accordingly.
     // we assume it's a whole phone number if it starts with +
-    final childNsn = _childController.national;
+    final String? childNsn = _childController.national;
     if (childNsn != null && childNsn.startsWith(RegExp('[${Patterns.plus}]'))) {
       // if starts with + then we parse the whole number
       // to figure out the country code
-      final international = childNsn;
+      final String international = childNsn;
       try {
         phoneNumber = PhoneNumber.parse(international);
       } on PhoneNumberException {

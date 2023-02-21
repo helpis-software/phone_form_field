@@ -11,6 +11,25 @@ import 'country_list.dart';
 import 'search_box.dart';
 
 class CountrySelector extends StatefulWidget {
+  const CountrySelector({
+    required this.onCountrySelected,
+    super.key,
+    this.scrollController,
+    this.scrollPhysics,
+    this.addFavoritesSeparator = true,
+    this.showCountryCode = false,
+    this.noResultMessage,
+    this.favoriteCountries = const <IsoCode>[],
+    this.countries,
+    this.searchAutofocus = kIsWeb,
+    this.subtitleStyle,
+    this.titleStyle,
+    this.searchBoxDecoration,
+    this.searchBoxTextStyle,
+    this.searchBoxIconColor,
+    this.flagSize = 40,
+  });
+
   /// List of countries to display in the selector
   /// Value optional in constructor.
   /// when omitted, the full country list is displayed
@@ -60,27 +79,55 @@ class CountrySelector extends StatefulWidget {
   final Color? searchBoxIconColor;
   final double flagSize;
 
-  const CountrySelector({
-    Key? key,
-    required this.onCountrySelected,
-    this.scrollController,
-    this.scrollPhysics,
-    this.addFavoritesSeparator = true,
-    this.showCountryCode = false,
-    this.noResultMessage,
-    this.favoriteCountries = const [],
-    this.countries,
-    this.searchAutofocus = kIsWeb,
-    this.subtitleStyle,
-    this.titleStyle,
-    this.searchBoxDecoration,
-    this.searchBoxTextStyle,
-    this.searchBoxIconColor,
-    this.flagSize = 40,
-  }) : super(key: key);
-
   @override
   CountrySelectorState createState() => CountrySelectorState();
+  @override
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<IsoCode>('countries', countries))
+      ..add(DoubleProperty('flagSize', flagSize))
+      ..add(ColorProperty('searchBoxIconColor', searchBoxIconColor))
+      ..add(
+        DiagnosticsProperty<TextStyle?>(
+          'searchBoxTextStyle',
+          searchBoxTextStyle,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<InputDecoration?>(
+          'searchBoxDecoration',
+          searchBoxDecoration,
+        ),
+      )
+      ..add(DiagnosticsProperty<TextStyle?>('titleStyle', titleStyle))
+      ..add(DiagnosticsProperty<TextStyle?>('subtitleStyle', subtitleStyle))
+      ..add(DiagnosticsProperty<bool>('searchAutofocus', searchAutofocus))
+      ..add(StringProperty('noResultMessage', noResultMessage))
+      ..add(DiagnosticsProperty<bool>('showCountryCode', showCountryCode))
+      ..add(
+        DiagnosticsProperty<bool>(
+          'addFavoritesSeparator',
+          addFavoritesSeparator,
+        ),
+      )
+      ..add(IterableProperty<IsoCode>('favoriteCountries', favoriteCountries))
+      ..add(
+        DiagnosticsProperty<ScrollPhysics?>('scrollPhysics', scrollPhysics),
+      )
+      ..add(
+        DiagnosticsProperty<ScrollController?>(
+          'scrollController',
+          scrollController,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty<ValueChanged<Country>>.has(
+          'onCountrySelected',
+          onCountrySelected,
+        ),
+      );
+  }
 }
 
 class CountrySelectorState extends State<CountrySelector> {
@@ -88,63 +135,69 @@ class CountrySelectorState extends State<CountrySelector> {
   late CountryFinder _favoriteCountryFinder;
 
   @override
-  didChangeDependencies() {
+  void didChangeDependencies() {
     super.didChangeDependencies();
-    final localization = PhoneFieldLocalization.of(context) ?? PhoneFieldLocalizationEn();
-    final isoCodes = widget.countries ?? IsoCode.values;
-    final countryRegistry = LocalizedCountryRegistry.cached(localization);
-    final notFavoriteCountries = countryRegistry.whereIsoIn(isoCodes, omit: widget.favoriteCountries);
-    final favoriteCountries = countryRegistry.whereIsoIn(widget.favoriteCountries);
+    final PhoneFieldLocalization localization =
+        PhoneFieldLocalization.of(context) ?? PhoneFieldLocalizationEn();
+    final List<IsoCode> isoCodes = widget.countries ?? IsoCode.values;
+    final LocalizedCountryRegistry countryRegistry =
+        LocalizedCountryRegistry.cached(localization);
+    final List<Country> notFavoriteCountries = countryRegistry.whereIsoIn(
+      isoCodes,
+      omit: widget.favoriteCountries,
+    );
+    final List<Country> favoriteCountries = countryRegistry.whereIsoIn(
+      widget.favoriteCountries,
+    );
     _countryFinder = CountryFinder(notFavoriteCountries);
     _favoriteCountryFinder = CountryFinder(favoriteCountries, sort: false);
   }
 
-  _onSearch(String searchedText) {
+  void _onSearch(final String searchedText) {
     _countryFinder.filter(searchedText);
     _favoriteCountryFinder.filter(searchedText);
     setState(() {});
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 8),
-        Container(
-          width: 50,
-          height: 4,
-          decoration: BoxDecoration(
+  Widget build(final BuildContext context) => Column(
+        children: <Widget>[
+          const SizedBox(height: 8),
+          Container(
+            width: 50,
+            height: 4,
+            decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.circular(8)),
-        ),
-        SizedBox(
-          height: 70,
-          width: double.infinity,
-          child: SearchBox(
-            autofocus: widget.searchAutofocus,
-            onChanged: _onSearch,
-            decoration: widget.searchBoxDecoration,
-            style: widget.searchBoxTextStyle,
-            searchIconColor: widget.searchBoxIconColor,
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        const Divider(height: 0, thickness: 1.2),
-        Flexible(
-          child: CountryList(
-            favorites: _favoriteCountryFinder.filteredCountries,
-            countries: _countryFinder.filteredCountries,
-            showDialCode: widget.showCountryCode,
-            onTap: widget.onCountrySelected,
-            flagSize: widget.flagSize,
-            scrollController: widget.scrollController,
-            scrollPhysics: widget.scrollPhysics,
-            noResultMessage: widget.noResultMessage,
-            titleStyle: widget.titleStyle,
-            subtitleStyle: widget.subtitleStyle,
+          SizedBox(
+            height: 70,
+            width: double.infinity,
+            child: SearchBox(
+              autofocus: widget.searchAutofocus,
+              onChanged: _onSearch,
+              decoration: widget.searchBoxDecoration,
+              style: widget.searchBoxTextStyle,
+              searchIconColor: widget.searchBoxIconColor,
+            ),
           ),
-        ),
-      ],
-    );
-  }
+          const SizedBox(height: 16),
+          const Divider(height: 0, thickness: 1.2),
+          Flexible(
+            child: CountryList(
+              favorites: _favoriteCountryFinder.filteredCountries,
+              countries: _countryFinder.filteredCountries,
+              showDialCode: widget.showCountryCode,
+              onTap: widget.onCountrySelected,
+              flagSize: widget.flagSize,
+              scrollController: widget.scrollController,
+              scrollPhysics: widget.scrollPhysics,
+              noResultMessage: widget.noResultMessage,
+              titleStyle: widget.titleStyle,
+              subtitleStyle: widget.subtitleStyle,
+            ),
+          ),
+        ],
+      );
 }

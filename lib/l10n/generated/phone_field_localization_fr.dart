@@ -2,7 +2,7 @@ import 'phone_field_localization.dart';
 
 /// The translations for French (`fr`).
 class PhoneFieldLocalizationFr extends PhoneFieldLocalization {
-  PhoneFieldLocalizationFr([String locale = 'fr']) : super(locale);
+  PhoneFieldLocalizationFr([super.locale = 'fr']);
 
   @override
   String get invalidPhoneNumber => 'Numéro de téléphone invalide';
@@ -24,7 +24,7 @@ class PhoneFieldLocalizationFr extends PhoneFieldLocalization {
   String get noResultMessage => 'Aucun résultat';
 
   @override
-  String get ac_ => 'Île de l\'Ascension';
+  String get ac_ => "Île de l'Ascension";
 
   @override
   String get ad_ => 'Andorre';
@@ -156,7 +156,7 @@ class PhoneFieldLocalizationFr extends PhoneFieldLocalization {
   String get ch_ => 'Suisse';
 
   @override
-  String get ci_ => 'Côte d\'Ivoire';
+  String get ci_ => "Côte d'Ivoire";
 
   @override
   String get ck_ => 'Îles Cook';
@@ -183,7 +183,7 @@ class PhoneFieldLocalizationFr extends PhoneFieldLocalization {
   String get cv_ => 'Cap-Vert';
 
   @override
-  String get cx_ => 'L\'île de noël';
+  String get cx_ => "L'île de noël";
 
   @override
   String get cy_ => 'Chypre';
@@ -333,7 +333,7 @@ class PhoneFieldLocalizationFr extends PhoneFieldLocalization {
   String get in_ => 'Inde';
 
   @override
-  String get io_ => 'Territoire britannique de l\'océan Indien';
+  String get io_ => "Territoire britannique de l'océan Indien";
 
   @override
   String get iq_ => 'Irak';
@@ -504,7 +504,7 @@ class PhoneFieldLocalizationFr extends PhoneFieldLocalization {
   String get ne_ => 'Niger';
 
   @override
-  String get nf_ => 'l\'ile de Norfolk';
+  String get nf_ => "l'ile de Norfolk";
 
   @override
   String get ng_ => 'Nigeria';

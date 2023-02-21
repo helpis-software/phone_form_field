@@ -2,7 +2,7 @@ import 'phone_field_localization.dart';
 
 /// The translations for English (`en`).
 class PhoneFieldLocalizationEn extends PhoneFieldLocalization {
-  PhoneFieldLocalizationEn([String locale = 'en']) : super(locale);
+  PhoneFieldLocalizationEn([super.locale = 'en']);
 
   @override
   String get invalidPhoneNumber => 'Invalid phone number';
@@ -155,7 +155,7 @@ class PhoneFieldLocalizationEn extends PhoneFieldLocalization {
   String get ch_ => 'Switzerland';
 
   @override
-  String get ci_ => 'Cote d\'Ivoire';
+  String get ci_ => "Cote d'Ivoire";
 
   @override
   String get ck_ => 'Cook Islands';
@@ -377,7 +377,7 @@ class PhoneFieldLocalizationEn extends PhoneFieldLocalization {
   String get kn_ => 'Saint Kitts and Nevis';
 
   @override
-  String get kp_ => 'Korea, Democratic People\'s Republic of Korea';
+  String get kp_ => "Korea, Democratic People's Republic of Korea";
 
   @override
   String get kr_ => 'Korea, Republic of South Korea';
