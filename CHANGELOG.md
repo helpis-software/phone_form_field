@@ -1,3 +1,7 @@
+## 7.1.1
+
+ - **REFACTOR**: Fix analyzer issues. ([f4e6638c](https://github.com/helpis-software/ocdp.git/commit/f4e6638cabb3414850d857fb4497781f46658fdc))
+
 ## 7.1.0
 
 - **FEAT**: add titleStyle and subTitle style ([#117](https://github.com/helpis-software/ocdp.git/issues/117)). ([35d06db9](https://github.com/helpis-software/ocdp.git/commit/35d06db9dc8a09ddc49b74e11dac0850ba1fda19))
