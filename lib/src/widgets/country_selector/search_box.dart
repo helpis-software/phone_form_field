@@ -56,8 +56,7 @@ class SearchBox extends StatelessWidget {
       ..add(ColorProperty('searchIconColor', searchIconColor))
       ..add(DiagnosticsProperty<TextStyle?>('style', style))
       ..add(DiagnosticsProperty<InputDecoration?>('decoration', decoration))
-      ..add(DiagnosticsProperty<bool>('autofocus', autofocus));
-    properties
-        .add(ObjectFlagProperty<Function()>.has('onSubmitted', onSubmitted));
+      ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
+      ..add(ObjectFlagProperty<Function()>.has('onSubmitted', onSubmitted));
   }
 }

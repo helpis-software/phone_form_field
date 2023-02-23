@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import '../../phone_form_field.dart';
 import '../constants/patterns.dart';
 import '../models/phone_field_controller.dart';
-import 'country_selector/country_selector_navigator.dart';
 
 part 'phone_field_state.dart';
 
