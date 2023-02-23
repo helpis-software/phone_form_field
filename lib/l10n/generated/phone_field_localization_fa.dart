@@ -2,7 +2,7 @@ import 'phone_field_localization.dart';
 
 /// The translations for Persian (`fa`).
 class PhoneFieldLocalizationFa extends PhoneFieldLocalization {
-  PhoneFieldLocalizationFa([String locale = 'fa']) : super(locale);
+  PhoneFieldLocalizationFa([super.locale = 'fa']);
 
   @override
   String get invalidPhoneNumber => 'شماره تلفن نامعبتر';
@@ -155,7 +155,7 @@ class PhoneFieldLocalizationFa extends PhoneFieldLocalization {
   String get ch_ => 'Switzerland';
 
   @override
-  String get ci_ => 'Cote d\'Ivoire';
+  String get ci_ => "Cote d'Ivoire";
 
   @override
   String get ck_ => 'Cook Islands';
@@ -377,7 +377,7 @@ class PhoneFieldLocalizationFa extends PhoneFieldLocalization {
   String get kn_ => 'Saint Kitts and Nevis';
 
   @override
-  String get kp_ => 'Korea, Democratic People\'s Republic of Korea';
+  String get kp_ => "Korea, Democratic People's Republic of Korea";
 
   @override
   String get kr_ => 'Korea, Republic of South Korea';

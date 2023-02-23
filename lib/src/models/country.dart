@@ -1,7 +1,12 @@
 import 'package:dart_countries/dart_countries.dart';
+import 'package:flutter/foundation.dart';
 
 /// Country regroup informations for displaying a list of countries
+@immutable
 class Country {
+  Country(this.isoCode, this.name)
+      : countryCode = countriesCountryCode[isoCode]!;
+
   /// Country alpha-2 iso code
   final IsoCode isoCode;
 
@@ -14,11 +19,8 @@ class Country {
   /// returns "+ [countryCode]"
   String get displayCountryCode => '+ $countryCode';
 
-  Country(this.isoCode, this.name)
-      : countryCode = countriesCountryCode[isoCode]!;
-
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(final Object other) =>
       identical(this, other) ||
       other is Country &&
           runtimeType == other.runtimeType &&
@@ -28,7 +30,5 @@ class Country {
   int get hashCode => isoCode.hashCode;
 
   @override
-  String toString() {
-    return 'Country{isoCode: $isoCode}';
-  }
+  String toString() => 'Country{isoCode: $isoCode}';
 }

@@ -73,15 +73,16 @@ import 'phone_field_localization_zh.dart';
 /// be consistent with the languages listed in the PhoneFieldLocalization.supportedLocales
 /// property.
 abstract class PhoneFieldLocalization {
-  PhoneFieldLocalization(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  PhoneFieldLocalization(final String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale);
 
   final String localeName;
 
-  static PhoneFieldLocalization? of(BuildContext context) {
-    return Localizations.of<PhoneFieldLocalization>(
-        context, PhoneFieldLocalization);
-  }
+  static PhoneFieldLocalization? of(final BuildContext context) =>
+      Localizations.of<PhoneFieldLocalization>(
+        context,
+        PhoneFieldLocalization,
+      );
 
   static const LocalizationsDelegate<PhoneFieldLocalization> delegate =
       _PhoneFieldLocalizationDelegate();
@@ -1623,13 +1624,13 @@ class _PhoneFieldLocalizationDelegate
   const _PhoneFieldLocalizationDelegate();
 
   @override
-  Future<PhoneFieldLocalization> load(Locale locale) {
-    return SynchronousFuture<PhoneFieldLocalization>(
-        lookupPhoneFieldLocalization(locale));
-  }
+  Future<PhoneFieldLocalization> load(final Locale locale) =>
+      SynchronousFuture<PhoneFieldLocalization>(
+        lookupPhoneFieldLocalization(locale),
+      );
 
   @override
-  bool isSupported(Locale locale) => <String>[
+  bool isSupported(final Locale locale) => <String>[
         'ar',
         'de',
         'el',
@@ -1648,10 +1649,10 @@ class _PhoneFieldLocalizationDelegate
       ].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_PhoneFieldLocalizationDelegate old) => false;
+  bool shouldReload(final _PhoneFieldLocalizationDelegate old) => false;
 }
 
-PhoneFieldLocalization lookupPhoneFieldLocalization(Locale locale) {
+PhoneFieldLocalization lookupPhoneFieldLocalization(final Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'ar':

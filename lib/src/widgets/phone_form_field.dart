@@ -1,17 +1,18 @@
 import 'dart:async';
+import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:phone_form_field/src/constants/patterns.dart';
 import 'package:phone_form_field/src/helpers/validator_translator.dart';
-import 'package:phone_form_field/src/models/phone_field_controller.dart';
 import 'package:phone_form_field/src/models/phone_controller.dart';
+import 'package:phone_form_field/src/models/phone_field_controller.dart';
 import 'package:phone_form_field/src/validator/phone_validator.dart';
 import 'package:phone_form_field/src/widgets/phone_field.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 import 'country_selector/country_selector_navigator.dart';
-import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
 part 'phone_form_field_state.dart';
 
@@ -46,13 +47,13 @@ part 'phone_form_field_state.dart';
 ///
 ///
 /// This does not affect the output value, only the display.
-/// Therefor [onSizeFound] will still return a [PhoneNumber]
+/// Therefor `onSizeFound` will still return a [PhoneNumber]
 /// with nsn of 677784455.
 /// {@endtemplate}
 ///
 /// ### phoneNumberType:
 /// {@template phoneNumberType}
-/// specify the type of phone number with [phoneNumberType].
+/// specify the type of phone number with `phoneNumberType`.
 ///
 /// accepted values are:
 ///   - null (can be mobile or fixedLine)
@@ -64,7 +65,8 @@ part 'phone_form_field_state.dart';
 /// ### Country picker:
 ///
 /// {@template selectorNavigator}
-/// specify which type of country selector will be shown with [selectorNavigator].
+/// specify which type of country selector will be shown with
+/// [PhoneField.selectorNavigator].
 ///
 /// Uses one of:
 ///  - const BottomSheetNavigator()
@@ -80,93 +82,73 @@ part 'phone_form_field_state.dart';
 /// - the field has a value for national number.
 /// - the field has no label obstructing the view.
 class PhoneFormField extends FormField<PhoneNumber> {
-  /// {@macro controller}
-  final PhoneController? controller;
-
-  /// {@macro shouldFormat}
-  final bool shouldFormat;
-
-  /// callback called when the input value changes
-  final ValueChanged<PhoneNumber?>? onChanged;
-
-  /// country that is displayed when there is no value
-  final IsoCode defaultCountry;
-
-  /// the focusNode of the national number
-  final FocusNode? focusNode;
-
   PhoneFormField({
-    Key? key,
+    super.key,
     this.controller,
     this.shouldFormat = true,
     this.onChanged,
     this.focusNode,
-    bool showFlagInInput = true,
-    CountrySelectorNavigator countrySelectorNavigator =
+    final bool showFlagInInput = true,
+    final CountrySelectorNavigator countrySelectorNavigator =
         const CountrySelectorNavigator.searchDelegate(),
-    Function(PhoneNumber?)? onSaved,
+    Function(PhoneNumber?)? super.onSaved,
     this.defaultCountry = IsoCode.US,
-    InputDecoration decoration =
+    final InputDecoration decoration =
         const InputDecoration(border: UnderlineInputBorder()),
-    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
-    PhoneNumber? initialValue,
-    double flagSize = 16,
-    PhoneNumberInputValidator? validator,
-    bool isCountrySelectionEnabled = true,
-    bool isCountryChipPersistent = false,
+    AutovalidateMode super.autovalidateMode =
+        AutovalidateMode.onUserInteraction,
+    final PhoneNumber? initialValue,
+    final double flagSize = 16,
+    final PhoneNumberInputValidator? validator,
+    final bool isCountrySelectionEnabled = true,
+    final bool isCountryChipPersistent = false,
     // textfield inputs
-    TextInputType keyboardType = TextInputType.phone,
-    TextInputAction? textInputAction,
-    TextStyle? style,
-    TextStyle? countryCodeStyle,
-    StrutStyle? strutStyle,
-    TextAlign textAlign = TextAlign.start,
-    TextAlignVertical? textAlignVertical,
-    bool autofocus = false,
-    String obscuringCharacter = '*',
-    bool obscureText = false,
-    bool autocorrect = true,
-    SmartDashesType? smartDashesType,
-    SmartQuotesType? smartQuotesType,
-    bool enableSuggestions = true,
-    ToolbarOptions? toolbarOptions,
-    bool? showCursor,
-    VoidCallback? onEditingComplete,
-    ValueChanged<String>? onSubmitted,
-    AppPrivateCommandCallback? onAppPrivateCommand,
-    List<TextInputFormatter>? inputFormatters,
-    bool enabled = true,
-    double cursorWidth = 2.0,
-    double? cursorHeight,
-    Radius? cursorRadius,
-    Color? cursorColor,
-    ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
-    ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
-    Brightness? keyboardAppearance,
-    EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
-    bool enableInteractiveSelection = true,
-    TextSelectionControls? selectionControls,
-    MouseCursor? mouseCursor,
-    ScrollPhysics? scrollPhysics,
-    ScrollController? scrollController,
-    Iterable<String>? autofillHints,
-    String? restorationId,
-    bool enableIMEPersonalizedLearning = true,
+    final TextInputType keyboardType = TextInputType.phone,
+    final TextInputAction? textInputAction,
+    final TextStyle? style,
+    final TextStyle? countryCodeStyle,
+    final StrutStyle? strutStyle,
+    final TextAlign textAlign = TextAlign.start,
+    final TextAlignVertical? textAlignVertical,
+    final bool autofocus = false,
+    final String obscuringCharacter = '*',
+    final bool obscureText = false,
+    final bool autocorrect = true,
+    final SmartDashesType? smartDashesType,
+    final SmartQuotesType? smartQuotesType,
+    final bool enableSuggestions = true,
+    final EditableTextContextMenuBuilder? contextMenuBuilder,
+    final bool? showCursor,
+    final VoidCallback? onEditingComplete,
+    final ValueChanged<String>? onSubmitted,
+    final AppPrivateCommandCallback? onAppPrivateCommand,
+    final List<TextInputFormatter>? inputFormatters,
+    super.enabled,
+    final double cursorWidth = 2.0,
+    final double? cursorHeight,
+    final Radius? cursorRadius,
+    final Color? cursorColor,
+    final ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
+    final ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
+    final Brightness? keyboardAppearance,
+    final EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
+    final bool enableInteractiveSelection = true,
+    final TextSelectionControls? selectionControls,
+    final MouseCursor? mouseCursor,
+    final ScrollPhysics? scrollPhysics,
+    final ScrollController? scrollController,
+    final Iterable<String>? autofillHints,
+    super.restorationId,
+    final bool enableIMEPersonalizedLearning = true,
   })  : assert(
           initialValue == null || controller == null,
           'One of initialValue or controller can be specified at a time',
         ),
         super(
-          key: key,
-          autovalidateMode: autovalidateMode,
-          enabled: enabled,
-          initialValue:
-              controller != null ? controller.initialValue : initialValue,
-          onSaved: onSaved,
+          initialValue: controller?.initialValue ?? initialValue,
           validator: validator ?? PhoneValidator.valid(),
-          restorationId: restorationId,
-          builder: (state) {
-            final field = state as PhoneFormFieldState;
+          builder: (final FormFieldState<PhoneNumber> state) {
+            final PhoneFormFieldState field = state as PhoneFormFieldState;
             return PhoneField(
               controller: field._childController,
               showFlagInInput: showFlagInInput,
@@ -193,7 +175,7 @@ class PhoneFormField extends FormField<PhoneNumber> {
               smartDashesType: smartDashesType,
               smartQuotesType: smartQuotesType,
               enableSuggestions: enableSuggestions,
-              toolbarOptions: toolbarOptions,
+              contextMenuBuilder: contextMenuBuilder,
               showCursor: showCursor,
               onEditingComplete: onEditingComplete,
               onSubmitted: onSubmitted,
@@ -218,6 +200,37 @@ class PhoneFormField extends FormField<PhoneNumber> {
           },
         );
 
+  /// {@macro controller}
+  final PhoneController? controller;
+
+  /// {@macro shouldFormat}
+  final bool shouldFormat;
+
+  /// callback called when the input value changes
+  final ValueChanged<PhoneNumber?>? onChanged;
+
+  /// country that is displayed when there is no value
+  final IsoCode defaultCountry;
+
+  /// the focusNode of the national number
+  final FocusNode? focusNode;
+
   @override
   PhoneFormFieldState createState() => PhoneFormFieldState();
+
+  @override
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<PhoneController?>('controller', controller))
+      ..add(DiagnosticsProperty<bool>('shouldFormat', shouldFormat))
+      ..add(
+        ObjectFlagProperty<ValueChanged<PhoneNumber?>?>.has(
+          'onChanged',
+          onChanged,
+        ),
+      )
+      ..add(EnumProperty<IsoCode>('defaultCountry', defaultCountry))
+      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
+  }
 }

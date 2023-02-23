@@ -10,6 +10,21 @@ import '../../models/country.dart';
 import 'country_list.dart';
 
 class CountrySelectorSearchDelegate extends SearchDelegate<Country> {
+  CountrySelectorSearchDelegate({
+    required this.onCountrySelected,
+    this.scrollController,
+    this.scrollPhysics,
+    this.addFavoritesSeparator = true,
+    this.showCountryCode = false,
+    this.noResultMessage,
+    final List<IsoCode> favoriteCountries = const <IsoCode>[],
+    final List<IsoCode>? countries,
+    this.searchAutofocus = kIsWeb,
+    this.flagSize = 40,
+    this.titleStyle,
+    this.subtitleStyle,
+  })  : countriesIso = countries ?? IsoCode.values,
+        favoriteCountriesIso = favoriteCountries;
   late CountryFinder _countryFinder;
   late CountryFinder _favoriteCountryFinder;
 
@@ -55,47 +70,30 @@ class CountrySelectorSearchDelegate extends SearchDelegate<Country> {
   /// Override default subtitle TextStyle
   final TextStyle? subtitleStyle;
 
-  CountrySelectorSearchDelegate({
-    Key? key,
-    required this.onCountrySelected,
-    this.scrollController,
-    this.scrollPhysics,
-    this.addFavoritesSeparator = true,
-    this.showCountryCode = false,
-    this.noResultMessage,
-    List<IsoCode> favoriteCountries = const [],
-    List<IsoCode>? countries,
-    this.searchAutofocus = kIsWeb,
-    this.flagSize = 40,
-    this.titleStyle,
-    this.subtitleStyle,
-  })  : countriesIso = countries ?? IsoCode.values,
-        favoriteCountriesIso = favoriteCountries;
-
   @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-        onPressed: () => query = '',
-        icon: const Icon(Icons.clear),
-      ),
-    ];
-  }
+  List<Widget>? buildActions(final BuildContext context) => <Widget>[
+        IconButton(
+          onPressed: () => query = '',
+          icon: const Icon(Icons.clear),
+        ),
+      ];
 
-  void _initIfRequired(BuildContext context) {
-    final localization =
+  void _initIfRequired(final BuildContext context) {
+    final PhoneFieldLocalization localization =
         PhoneFieldLocalization.of(context) ?? PhoneFieldLocalizationEn();
-    final countryRegistry = LocalizedCountryRegistry.cached(localization);
+    final LocalizedCountryRegistry countryRegistry =
+        LocalizedCountryRegistry.cached(localization);
     // if localization has not changed no need to do anything
     if (countryRegistry == _localizedCountryRegistry) {
       return;
     }
     _localizedCountryRegistry = countryRegistry;
-    final notFavoriteCountries = countryRegistry.whereIsoIn(
+    final List<Country> notFavoriteCountries = countryRegistry.whereIsoIn(
       countriesIso,
       omit: favoriteCountriesIso,
     );
-    final favoriteCountries = countryRegistry.whereIsoIn(favoriteCountriesIso);
+    final List<Country> favoriteCountries =
+        countryRegistry.whereIsoIn(favoriteCountriesIso);
     _countryFinder = CountryFinder(notFavoriteCountries);
     _favoriteCountryFinder = CountryFinder(favoriteCountries, sort: false);
   }
@@ -106,14 +104,12 @@ class CountrySelectorSearchDelegate extends SearchDelegate<Country> {
   }
 
   @override
-  Widget? buildLeading(BuildContext context) {
-    return BackButton(
-      onPressed: () => Navigator.of(context).pop(),
-    );
-  }
+  Widget? buildLeading(final BuildContext context) => BackButton(
+        onPressed: () => Navigator.of(context).pop(),
+      );
 
   @override
-  Widget buildSuggestions(BuildContext context) {
+  Widget buildSuggestions(final BuildContext context) {
     _initIfRequired(context);
     _updateList();
 
@@ -132,7 +128,5 @@ class CountrySelectorSearchDelegate extends SearchDelegate<Country> {
   }
 
   @override
-  Widget buildResults(BuildContext context) {
-    return buildSuggestions(context);
-  }
+  Widget buildResults(final BuildContext context) => buildSuggestions(context);
 }
