@@ -80,7 +80,8 @@ class CountryFinder {
 
     _filteredCountries = _allCountries.where((final Country country) {
       final String countryName = removeDiacritics(country.name.toLowerCase());
-      return countryName.contains(searchText);
+      return countryName.contains(searchTxt) ||
+          country.isoCode.name.toLowerCase().contains(searchTxt);
     }).toList()
       // puts the ones that begin by txt first
       ..sort(compareCountries);

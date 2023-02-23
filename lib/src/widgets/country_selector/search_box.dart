@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 class SearchBox extends StatelessWidget {
   const SearchBox({
     required this.onChanged,
+    required this.onSubmitted,
     required this.autofocus,
-    super.key,
     this.decoration,
     this.style,
     this.searchIconColor,
-  });
+    super.key,
+  }) : super();
   final Function(String) onChanged;
+  final Function() onSubmitted;
   final bool autofocus;
   final InputDecoration? decoration;
   final TextStyle? style;
@@ -22,6 +24,8 @@ class SearchBox extends StatelessWidget {
         child: TextField(
           autofocus: autofocus,
           onChanged: onChanged,
+          onSubmitted: (final _) => onSubmitted(),
+          cursorColor: style?.color,
           style: style,
           decoration: decoration ??
               InputDecoration(
@@ -41,6 +45,7 @@ class SearchBox extends StatelessWidget {
               ),
         ),
       );
+
   @override
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -52,5 +57,7 @@ class SearchBox extends StatelessWidget {
       ..add(DiagnosticsProperty<TextStyle?>('style', style))
       ..add(DiagnosticsProperty<InputDecoration?>('decoration', decoration))
       ..add(DiagnosticsProperty<bool>('autofocus', autofocus));
+    properties
+        .add(ObjectFlagProperty<Function()>.has('onSubmitted', onSubmitted));
   }
 }

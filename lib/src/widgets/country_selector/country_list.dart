@@ -1,8 +1,8 @@
 import 'package:circle_flags/circle_flags.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:phone_form_field/l10n/generated/phone_field_localization.dart';
 
+import '../../../l10n/generated/phone_field_localization.dart';
 import '../../models/country.dart';
 
 class CountryList extends StatelessWidget {
@@ -67,7 +67,6 @@ class CountryList extends StatelessWidget {
     return ListView.builder(
       physics: scrollPhysics,
       controller: scrollController,
-      shrinkWrap: true,
       itemCount: _allListElement.length,
       itemBuilder: (final BuildContext context, final int index) {
         final Country? country = _allListElement[index];

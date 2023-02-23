@@ -159,6 +159,14 @@ class CountrySelectorState extends State<CountrySelector> {
     setState(() {});
   }
 
+  onSubmitted() {
+    if (_favoriteCountryFinder.filteredCountries.isNotEmpty) {
+      widget.onCountrySelected(_favoriteCountryFinder.filteredCountries.first);
+    } else if (_countryFinder.filteredCountries.isNotEmpty) {
+      widget.onCountrySelected(_countryFinder.filteredCountries.first);
+    }
+  }
+
   @override
   Widget build(final BuildContext context) => Column(
         children: <Widget>[
@@ -177,6 +185,7 @@ class CountrySelectorState extends State<CountrySelector> {
             child: SearchBox(
               autofocus: widget.searchAutofocus,
               onChanged: _onSearch,
+              onSubmitted: onSubmitted,
               decoration: widget.searchBoxDecoration,
               style: widget.searchBoxTextStyle,
               searchIconColor: widget.searchBoxIconColor,

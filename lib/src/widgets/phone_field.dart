@@ -3,10 +3,11 @@ import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:phone_form_field/src/constants/patterns.dart';
-import 'package:phone_form_field/src/models/phone_field_controller.dart';
 
 import '../../phone_form_field.dart';
+import '../constants/patterns.dart';
+import '../models/phone_field_controller.dart';
+import 'country_selector/country_selector_navigator.dart';
 
 part 'phone_field_state.dart';
 
@@ -37,7 +38,7 @@ class PhoneField extends StatefulWidget {
     required this.smartDashesType,
     required this.smartQuotesType,
     required this.enableSuggestions,
-    required this.toolbarContextMenuBuilder,
+    required this.contextMenuBuilder,
     required this.showCursor,
     required this.onEditingComplete,
     required this.onSubmitted,
@@ -88,7 +89,7 @@ class PhoneField extends StatefulWidget {
   final SmartDashesType? smartDashesType;
   final SmartQuotesType? smartQuotesType;
   final bool enableSuggestions;
-  final EditableTextContextMenuBuilder? toolbarContextMenuBuilder;
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
   final bool? showCursor;
   final VoidCallback? onEditingComplete;
   final ValueChanged<String>? onSubmitted;
@@ -250,8 +251,14 @@ class PhoneField extends StatefulWidget {
       ..add(DiagnosticsProperty<bool>('showFlagInInput', showFlagInInput))
       ..add(
         ObjectFlagProperty<EditableTextContextMenuBuilder?>.has(
-          'toolbarContextMenuBuilder',
-          toolbarContextMenuBuilder,
+          'contextMenuBuilder',
+          contextMenuBuilder,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty<EditableTextContextMenuBuilder?>.has(
+          'contextMenuBuilder',
+          contextMenuBuilder,
         ),
       );
   }
