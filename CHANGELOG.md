@@ -1,6 +1,6 @@
 ## 7.1.1
 
- - **REFACTOR**: Fix analyzer issues. ([f4e6638c](https://github.com/helpis-software/ocdp.git/commit/f4e6638cabb3414850d857fb4497781f46658fdc))
+- **REFACTOR**: Fix analyzer issues. ([f4e6638c](https://github.com/helpis-software/ocdp.git/commit/f4e6638cabb3414850d857fb4497781f46658fdc))
 
 ## 7.1.0
 
@@ -199,7 +199,8 @@ Thus it was decided that it was not worth it to keep backward compatibility and 
 
 ## [1.2.0] - 25 / 05 / 2021
 
-* Minor release introducing SelectorConfig.
+- Minor release introducing SelectorConfig.
+
 - Fix problems with input focussing in cover sheet.
 
 ```
@@ -222,31 +223,35 @@ Thus it was decided that it was not worth it to keep backward compatibility and 
 
 ## [1.1.3] - 25 / 05 / 2021
 
-* fix initial value not setting up correctly
+- fix initial value not setting up correctly
+
 - Added different types of Country selector display: SelectorDisplay.coversBody, SelectorDisplay.coversLower. The old value is coversLower and the new default value is coversBody.
 
 ## [1.1.2] - 20 / 05 / 2021
 
-* minor changelog fix.
+- minor changelog fix.
 
 ## [1.1.1] - 20 / 05 / 2021
 
-* Added key to exported widgets.
+- Added key to exported widgets.
 
 ## [1.1.0] - 19 / 05 / 2021
 
-* [Breaking] : some classes from the package phone_numbers_parser aren't exported anymore. Mostly classes that are not intended to be used with this package.
+- [Breaking] : some classes from the package phone_numbers_parser aren't exported anymore. Mostly classes that are not intended to be used with this package.
+
 - Added example for widgets FlagDialCodeChip and CountrySelector
 - Added default values for FlagDialCodeChip and removed some unused values.
 
 ## [1.0.2] - 23 / 04 / 2021
 
-* Upped dependency phone_numbers_parser to 0.1.3
+- Upped dependency phone_numbers_parser to 0.1.3
+
 - Added phoneNumberType input to validate against specific types (mobile, fixed line)
 
 ## [1.0.1] - 23 / 04 / 2021
 
-* Fixed validity issue (issue #1)
+- Fixed validity issue (issue #1)
+
 - Allow country to be searched by dial code (issue #2)
 - Sort country search results to have more meaningful results at the top
 - Upped dependency phone_numbers_parser to 0.1.0
