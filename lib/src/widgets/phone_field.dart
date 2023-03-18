@@ -59,11 +59,13 @@ class PhoneField extends StatefulWidget {
     required this.autofillHints,
     required this.restorationId,
     required this.enableIMEPersonalizedLearning,
-    required this.inputFormatters, // form field params
+    required this.inputFormatters,
+    required this.showDialCode,
     super.key,
   });
   final PhoneFieldController controller;
   final bool showFlagInInput;
+  final bool showDialCode;
   final String? errorText;
   final double flagSize;
   final InputDecoration decoration;
@@ -88,7 +90,7 @@ class PhoneField extends StatefulWidget {
   final SmartDashesType? smartDashesType;
   final SmartQuotesType? smartQuotesType;
   final bool enableSuggestions;
-  final EditableTextContextMenuBuilder? contextMenuBuilder;
+  final Widget Function(BuildContext, EditableTextState)? contextMenuBuilder;
   final bool? showCursor;
   final VoidCallback? onEditingComplete;
   final ValueChanged<String>? onSubmitted;
@@ -259,6 +261,7 @@ class PhoneField extends StatefulWidget {
           'contextMenuBuilder',
           contextMenuBuilder,
         ),
-      );
+      )
+      ..add(DiagnosticsProperty<bool>('showDialCode', showDialCode));
   }
 }

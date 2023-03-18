@@ -117,13 +117,13 @@ class PhoneFormField extends FormField<PhoneNumber> {
     final SmartDashesType? smartDashesType,
     final SmartQuotesType? smartQuotesType,
     final bool enableSuggestions = true,
-    final EditableTextContextMenuBuilder? contextMenuBuilder,
+    final Widget Function(BuildContext, EditableTextState)? contextMenuBuilder,
     final bool? showCursor,
     final VoidCallback? onEditingComplete,
     final ValueChanged<String>? onSubmitted,
     final AppPrivateCommandCallback? onAppPrivateCommand,
     final List<TextInputFormatter>? inputFormatters,
-    super.enabled,
+    final bool enabled = true,
     final double cursorWidth = 2.0,
     final double? cursorHeight,
     final Radius? cursorRadius,
@@ -138,8 +138,9 @@ class PhoneFormField extends FormField<PhoneNumber> {
     final ScrollPhysics? scrollPhysics,
     final ScrollController? scrollController,
     final Iterable<String>? autofillHints,
-    super.restorationId,
+    final String? restorationId,
     final bool enableIMEPersonalizedLearning = true,
+    this.showDialCode = true,
   })  : assert(
           initialValue == null || controller == null,
           'One of initialValue or controller can be specified at a time',
@@ -154,6 +155,7 @@ class PhoneFormField extends FormField<PhoneNumber> {
               showFlagInInput: showFlagInInput,
               selectorNavigator: countrySelectorNavigator,
               errorText: field.getErrorText(),
+              showDialCode: showDialCode,
               flagSize: flagSize,
               decoration: decoration,
               enabled: enabled,
@@ -215,6 +217,9 @@ class PhoneFormField extends FormField<PhoneNumber> {
   /// the focusNode of the national number
   final FocusNode? focusNode;
 
+  /// show Dial Code or not
+  final bool showDialCode;
+
   @override
   PhoneFormFieldState createState() => PhoneFormFieldState();
 
@@ -231,6 +236,7 @@ class PhoneFormField extends FormField<PhoneNumber> {
         ),
       )
       ..add(EnumProperty<IsoCode>('defaultCountry', defaultCountry))
-      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
+      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
+      ..add(DiagnosticsProperty<bool>('showDialCode', showDialCode));
   }
 }

@@ -16,6 +16,7 @@ void main() {
       final PhoneNumber? initialValue,
       final PhoneController? controller,
       final bool showFlagInInput = true,
+      final bool showDialCode = true,
       final IsoCode defaultCountry = IsoCode.US,
       final bool shouldFormat = false,
       final PhoneNumberInputValidator? validator,
@@ -35,6 +36,7 @@ void main() {
                 onChanged: onChanged,
                 onSaved: onSaved,
                 showFlagInInput: showFlagInInput,
+                showDialCode: showDialCode,
                 controller: controller,
                 defaultCountry: defaultCountry,
                 shouldFormat: shouldFormat,
@@ -82,6 +84,58 @@ void main() {
       testWidgets('Should hide flag', (final WidgetTester tester) async {
         await tester.pumpWidget(getWidget(showFlagInInput: false));
         expect(find.byType(CircleFlag), findsNothing);
+      });
+
+      testWidgets('Should format when shouldFormat is true',
+          (final WidgetTester tester) async {
+        final PhoneNumber phoneNumber = PhoneNumber.parse(
+          '',
+          destinationCountry: IsoCode.FR,
+        );
+
+        await tester.pumpWidget(
+          getWidget(initialValue: phoneNumber, shouldFormat: true),
+        );
+        await tester.pump(const Duration(seconds: 1));
+        final Finder phoneField = find.byType(PhoneFormField);
+        await tester.enterText(phoneField, '677777777');
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.text('6 77 77 77 77'), findsOneWidget);
+      });
+
+      testWidgets('Should show dial code when showDialCode is true',
+          (final WidgetTester tester) async {
+        final PhoneNumber phoneNumber = PhoneNumber.parse(
+          '',
+          destinationCountry: IsoCode.FR,
+        );
+
+        await tester.pumpWidget(
+          getWidget(
+            initialValue: phoneNumber,
+            defaultCountry: IsoCode.FR,
+          ),
+        );
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.text('+ 33'), findsOneWidget);
+      });
+
+      testWidgets('Should hide dial code when showDialCode is false',
+          (final WidgetTester tester) async {
+        final PhoneNumber phoneNumber = PhoneNumber.parse(
+          '',
+          destinationCountry: IsoCode.FR,
+        );
+
+        await tester.pumpWidget(
+          getWidget(
+            initialValue: phoneNumber,
+            showDialCode: false,
+            defaultCountry: IsoCode.FR,
+          ),
+        );
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.text('+ 33'), findsNothing);
       });
     });
 
