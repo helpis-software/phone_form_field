@@ -173,7 +173,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "7.1.1"
+    version: "7.2.0"
   phone_number_metadata:
     dependency: transitive
     description:
@@ -247,26 +247,26 @@ packages:
     dependency: transitive
     description:
       name: vector_graphics
-      sha256: ea8d3fc7b2e0f35de38a7465063ecfcf03d8217f7962aa2a6717132cb5d43a79
+      sha256: "59a230f8bf37dd8b077335d1d64d895bccef0fb14f50730e3d79e8990bf3ed2b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.5"
+    version: "1.1.5+1"
   vector_graphics_codec:
     dependency: transitive
     description:
       name: vector_graphics_codec
-      sha256: a5eaa5d19e123ad4f61c3718ca1ed921c4e6254238d9145f82aa214955d9aced
+      sha256: "40781fe91c6d10a617c0289f7ec16cdb2d85a7f3654af2778c6d0adbf3bf45a3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.5"
+    version: "1.1.5+1"
   vector_graphics_compiler:
     dependency: transitive
     description:
       name: vector_graphics_compiler
-      sha256: "15edc42f7eaa478ce854eaf1fbb9062a899c0e4e56e775dd73b7f4709c97c4ca"
+      sha256: "6ca1298b70edcc3486fdb14032f1a186a593f1b5f6b5e82fb10febddcb1c61bb"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.5"
+    version: "1.1.5+1"
   vector_math:
     dependency: transitive
     description:
