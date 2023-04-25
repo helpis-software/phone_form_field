@@ -255,7 +255,7 @@ class BottomSheetNavigator extends CountrySelectorNavigator {
         showBottomSheet<Country?>(
       context: context,
       builder: (final _) => MediaQuery(
-        data: MediaQueryData.fromView(WidgetsBinding.instance.window),
+        data: MediaQueryData.fromView(View.of(context)),
         child: SafeArea(
           child: _getCountrySelector(
             onCountrySelected: (final Country country) {

@@ -231,8 +231,8 @@ class PhoneFormFieldScreenState extends State<PhoneFormFieldScreen> {
                                   setState(() => selectorNavigator = value);
                                 }
                               },
-                              items: const <
-                                  DropdownMenuItem<CountrySelectorNavigator>>[
+                              items: const <DropdownMenuItem<
+                                  CountrySelectorNavigator>>[
                                 DropdownMenuItem<CountrySelectorNavigator>(
                                   value: CountrySelectorNavigator.bottomSheet(),
                                   child: Text('Bottom sheet'),
