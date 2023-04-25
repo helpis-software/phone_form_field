@@ -1,3 +1,7 @@
+## 7.2.0
+
+ - **FEAT**: Replace deprecated WidgetsBinding.instance.window reference with View.of(context). ([4b2fa288](https://github.com/helpis-software/ocdp.git/commit/4b2fa2880b15bc26f82c78261a21376bbe0ed99b))
+
 ## 7.1.1
 
 - **REFACTOR**: Fix analyzer issues. ([f4e6638c](https://github.com/helpis-software/ocdp.git/commit/f4e6638cabb3414850d857fb4497781f46658fdc))
