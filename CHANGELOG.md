@@ -1,6 +1,6 @@
 ## 7.2.0
 
- - **FEAT**: Replace deprecated WidgetsBinding.instance.window reference with View.of(context). ([4b2fa288](https://github.com/helpis-software/ocdp.git/commit/4b2fa2880b15bc26f82c78261a21376bbe0ed99b))
+- **FEAT**: Replace deprecated WidgetsBinding.instance.window reference with View.of(context). ([4b2fa288](https://github.com/helpis-software/ocdp.git/commit/4b2fa2880b15bc26f82c78261a21376bbe0ed99b))
 
 ## 7.1.1
 
@@ -10,6 +10,8 @@
 
 - **FEAT**: add titleStyle and subTitle style ([#117](https://github.com/helpis-software/ocdp.git/issues/117)). ([35d06db9](https://github.com/helpis-software/ocdp.git/commit/35d06db9dc8a09ddc49b74e11dac0850ba1fda19))
 - **FEAT**: add greek internationalization ([#102](https://github.com/helpis-software/ocdp.git/issues/102)). ([d25b4a00](https://github.com/helpis-software/ocdp.git/commit/d25b4a00203be882a1a34e210221619e39eb09a1))
+- Relax intl version matching
+- Fix invalid initial value from controller
 
 ## [7.0.7]
 
@@ -18,7 +20,6 @@
 ## [7.0.6]
 
 - upgrade to phone numbers parser 7.0.1
-- upgrade circle flags to 1.0.4
 - upgrade circle flags to 1.0.4
 - fix flag rendering issues
 - fix parsing issue were some phone numbers were incorrectly parsed when the start of the phone number was the same as country code
@@ -32,7 +33,6 @@
 
 - Fixed flag size in draggable bottom sheet
 - Fixed initial svg rendering
-- Fixed initial svg rendering
 
 ## [7.0.3] 03/12/2022
 
@@ -41,7 +41,6 @@
 - added flag size
 
 ## [7.0.2] 10/08/2022
-
 
 - updated phone metadata
 - updated parser library
@@ -53,25 +52,21 @@
 
 ## [7.0.1] 27/07/2022
 
-
 - fix country code not shown when there is an hint
 - added `isCountryChipPersistent`
 - added `isCountrySelectionEnabled`
 
 ## [7.0.0] 25/07/2022
 
-
 - [Breaking] Update phone_numbers_parser major version
 
 ## [6.1.1] 22/07/2022
-
 
 - Readd RTL support
 - Removed diacritics from search
 - Added height and width to dialog
 
 ## [6.1.0] 26/05/2022
-
 
 - Revert RTL support as it is incomplete. (Feel free to resubmit a PR).
 - Fix a country selection search input auto focus issue.
@@ -80,11 +75,9 @@
 
 ## [6.0.0] 14/05/2022
 
-
 - require flutter 3
 
 ## [5.0.4] 11/05/2022
-
 
 - fix empty text direction bug
 
@@ -100,7 +93,6 @@
 
 ## [5.0.1] 05/04/2022
 
-
 - fix inkwell overflow on error
 - update docs
 
@@ -115,7 +107,6 @@
 - Refactor of internal to accomodate for different UI for country selection
 - Slight refactor of search process
 - Added possibility of styling hint text (thanks @xvrh)
-- [Breaking] use updated version of phone_number_parser which uses `IsoCode` for iso codes instead
 - [Breaking] use updated version of phone_number_parser which uses `IsoCode` for iso codes instead
   of plain string.
 - Added ci tests
@@ -138,16 +129,13 @@
 
 - Added a property called 'countryCodeStyle' to allow the customization of the TextStyle of country code. Thanks @moazelsawaf
 - Considering the size of the prefix icon ( if used ) while calculating the width of the CountryCodeChip InkWell. Thanks @moazelsawaf
-- Considering the size of the prefix icon ( if used ) while calculating the width of the CountryCodeChip InkWell. Thanks @moazelsawaf
 
 ## [4.5.0] 18 / 02 / 2022
-
 
 - Allow country code to be always visible when there is no label + an hint text
 - Fix editing issue where the cursor was moving forward
 
 ## [4.4.0] 07 / 11 / 2021
-
 
 - upgraded phone parser dependency which fix some validity issues
 - added swedish language
@@ -155,12 +143,10 @@
 
 ## [4.3.1] 23 / 10 / 2021
 
-
 - fix a focus issue when opening country selection
 - search bar in country selection is no auto focus false except for the web
 
 ## [4.3.0] 18 / 10 / 2021
-
 
 - Added most of textfield params to the phone input.
 - Added method to select the current national number from the controller
@@ -170,11 +156,9 @@
 
 ## [4.2.0] 16 / 10 / 2021
 
-
 - [deprecated] PhoneValidator.invalid in favor of PhoneValidator.valid as the naming did not make sens and was backward.
 
 ## [4.1.0 ] 15 / 10 / 2021
-
 
 - expose onEditingComplete and textInputAction
 - Update phone_number_parser library to 4.0.1, that library has breaking changes which could be reflected in the usage here
@@ -183,7 +167,6 @@
 
 ### Fixes
 
-
 - fix phone number type, thanks @emrsi
 - fix reset and usage as a FormField in general
 - fix onChanged & onSaved
@@ -191,12 +174,10 @@
 
 ### UI
 
-
 - added localized phone formatter
 - added DraggableModalBottomSheet, thanks @emrsi
 
 # Validation
-
 
 - Add PhoneValidator class to easily customize validation and defaults localization error messagees
 - Add PhoneFormField `validator` property
@@ -204,21 +185,17 @@
 
 # Misc
 
-
 - refactored internals
 - [Breaking] light parser was removed.
 - [Breaking] exposed `autoFillHints` and removed the `withHint` param
 - [Breaking] renamed all instances of `dialCode` to `countryCode` as dial code was semantically incorrect.
 
-### Note
-
-This major version was a big rework of the library and is packed with fixes.
+## Note
 
 This major version was a big rework of the library and is packed with fixes.
 Thus it was decided that it was not worth it to keep backward compatibility and therefor there are multiple breaking changes
 
 ## [3.0.0] - 27 / 08 / 2021
-
 
 - removed deprecated selector config
 - added controllers to control the value
@@ -236,7 +213,7 @@ Thus it was decided that it was not worth it to keep backward compatibility and 
 
 - Fix problems with input focussing in cover sheet.
 
-```
+```dart
   // cover sheet
   PhoneFormField(
     // ...
@@ -264,11 +241,7 @@ Thus it was decided that it was not worth it to keep backward compatibility and 
 
 - minor changelog fix.
 
-- minor changelog fix.
-
 ## [1.1.1] - 20 / 05 / 2021
-
-- Added key to exported widgets.
 
 - Added key to exported widgets.
 
@@ -296,34 +269,27 @@ Thus it was decided that it was not worth it to keep backward compatibility and 
 ## [1.0.0] - 21 / 04 / 2021
 
 - Reworked internal so the PhoneFormField behaves exactly like a TextFormField
-- Reworked internal so the PhoneFormField behaves exactly like a TextFormField
 
 ## [0.0.6] - 15 / 04 / 2021
 
-- InputDecoration renamed to decoration to match formField
 - InputDecoration renamed to decoration to match formField
 
 ## [0.0.5] - 15 / 04 / 2021
 
 - Match cursor color with border color
-- Match cursor color with border color
 
 ## [0.0.4] - 13 / 04 / 2021
 
-- Default font size 14
 - Default font size 14
 
 ## [0.0.3] - 13 / 04 / 2021
 
 - Breaking: inputBorder parameter replaced by inputDecoration for more maneability
-- Breaking: inputBorder parameter replaced by inputDecoration for more maneability
 
 ## [0.0.2] - 12 / 04 / 2021
 
 - Fix unresponsive onSave
-- Fix unresponsive onSave
 
 ## [0.0.1] - 12 / 04 / 2021
 
-- initial release
 - initial release

@@ -48,7 +48,10 @@ class PhoneValidator {
     /// determine whether a missing value should be reported as invalid
     final bool allowEmpty = true,
   }) =>
-      (final PhoneNumber? valueCandidate) {
+      (PhoneNumber? valueCandidate) {
+        if (valueCandidate == null && !allowEmpty) {
+          return errorText ?? 'invalidPhoneNumber';
+        }
         if (valueCandidate != null &&
             (!allowEmpty || valueCandidate.nsn.isNotEmpty) &&
             !valueCandidate.isValid()) {
